@@ -1,0 +1,13 @@
+package springmvc.model.dao;
+
+import java.util.List;
+
+import springmvc.model.CSCommittee;
+
+public interface CSCommitteeDao {
+
+	//CSReview getCSReview( Integer id );
+
+    List<CSCommittee> getCSReview();
+
+}

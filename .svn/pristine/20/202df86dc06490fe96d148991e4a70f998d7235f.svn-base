@@ -1,0 +1,57 @@
+package springmvc.model;
+
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "cs_reviews")
+public class CSReview implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	private Integer reviewer;
+   
+	@Id
+	@ManyToOne
+	CSUsers user;	
+	
+	@Id
+	@ManyToOne
+	CSJobs job;
+    
+
+    private String comments;
+    
+    private String rank;
+    
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public CSReview()
+    {
+    }
+
+	public String getRank() {
+		return rank;
+	}
+
+	public void setRank(String rank) {
+		this.rank = rank;
+	}
+
+	
+}

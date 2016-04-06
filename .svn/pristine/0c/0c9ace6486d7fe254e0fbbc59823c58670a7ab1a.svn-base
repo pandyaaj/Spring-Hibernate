@@ -1,0 +1,26 @@
+package springmvc.model.dao.jpa;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+
+import springmvc.model.CSCommittee;
+import springmvc.model.dao.CSCommitteeDao;
+
+@Repository
+public class CSCommitteeDaoImpl implements CSCommitteeDao {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+    
+	@Override
+	public List<CSCommittee> getCSReview(int i) {
+			return entityManager.createQuery( "select ref from CSCommittee ref join ref.reviwer i where i.id= :i", CSCommittee.class )
+	            .setParameter("i", i).getResultList();
+	}
+	
+
+}

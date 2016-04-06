@@ -1,0 +1,26 @@
+	
+	drop table CSApplicantsDegree CASCADE ;
+
+    drop table cs_jobapplicants CASCADE ;
+
+    drop table cs_jobapplicants_CSApplicantsDegree CASCADE ;
+
+    drop table cs_jobs CASCADE ;
+
+    drop table cs_jobs_cs_users CASCADE ;
+
+    drop table cs_review_committee CASCADE ;
+
+    drop table cs_review_committee_cs_jobs CASCADE ;
+
+    drop table cs_review_committee_cs_users CASCADE ;
+
+    drop table cs_reviews CASCADE ;
+
+    drop table cs_users CASCADE ;
+
+    drop table cs_users_cs_userstype CASCADE ;
+
+    drop table cs_userstype CASCADE ;
+
+    drop sequence hibernate_sequence;

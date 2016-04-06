@@ -1,0 +1,15 @@
+package springmvc.model.dao;
+
+import java.util.List;
+
+import springmvc.model.CSJobs;
+
+public interface CSJobsDao {
+
+	CSJobs getCSJobs( Integer id );
+
+    List<CSJobs> getCSJobs();
+    
+    List<CSJobs> getCSJobsApplicants();
+
+}

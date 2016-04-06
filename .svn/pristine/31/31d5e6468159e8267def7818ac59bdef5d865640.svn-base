@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="6841" started-at="2015-07-17T04:57:56Z" finished-at="2015-07-17T04:58:02Z">
+    <groups>
+      <group name="CSJobsApplicantsTest">
+        <method signature="CSJobsApplicantsTest.getCSJobsApplicants()[pri:0, instance:springmvc.model.dao.CSJobsApplicantsTest@260999e]" name="getCSJobsApplicants" class="springmvc.model.dao.CSJobsApplicantsTest"/>
+      </group> <!-- CSJobsApplicantsTest -->
+    </groups>
+    <test name="Default test" duration-ms="6841" started-at="2015-07-17T04:57:56Z" finished-at="2015-07-17T04:58:02Z">
+      <class name="springmvc.model.dao.CSJobsApplicantsTest">
+        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:springmvc.model.dao.CSJobsApplicantsTest@260999e]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="31" started-at="2015-07-16T21:57:56Z" finished-at="2015-07-16T21:57:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestClass -->
+        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:springmvc.model.dao.CSJobsApplicantsTest@260999e]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="5996" started-at="2015-07-16T21:57:56Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2015-07-16T21:58:02Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextPrepareTestInstance -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:springmvc.model.dao.CSJobsApplicantsTest@260999e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="213" started-at="2015-07-16T21:58:02Z" finished-at="2015-07-16T21:58:02Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void springmvc.model.dao.CSJobsApplicantsTest.getCSJobsApplicants()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="getCSJobsApplicants()[pri:0, instance:springmvc.model.dao.CSJobsApplicantsTest@260999e]" name="getCSJobsApplicants" duration-ms="522" started-at="2015-07-16T21:58:02Z" finished-at="2015-07-16T21:58:02Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getCSJobsApplicants -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:springmvc.model.dao.CSJobsApplicantsTest@260999e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="32" started-at="2015-07-16T21:58:02Z" finished-at="2015-07-16T21:58:02Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void springmvc.model.dao.CSJobsApplicantsTest.getCSJobsApplicants()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:springmvc.model.dao.CSJobsApplicantsTest@260999e]" name="springTestContextAfterTestClass" is-config="true" duration-ms="0" started-at="2015-07-16T21:58:02Z" finished-at="2015-07-16T21:58:02Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestClass -->
+      </class> <!-- springmvc.model.dao.CSJobsApplicantsTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

@@ -1,0 +1,25 @@
+package csjobs.model.dao.jpa;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+
+import csjobs.model.User;
+import csjobs.model.dao.UserDao;
+
+@Repository
+public class UserDaoImpl implements UserDao{
+
+	@PersistenceContext
+	private EntityManager entityManager;
+	
+	@Override
+	public List<User> getUserType(String email,String password) {
+		// TODO Auto-generated method stub
+		return  entityManager.createQuery("from User where email =:email and password=:password", User.class).setParameter("email", email).setParameter("password", password).getResultList();
+	}
+}
+	

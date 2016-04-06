@@ -1,0 +1,36 @@
+package springmvc.model.dao.jpa;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+
+import springmvc.model.CSJobs;
+import springmvc.model.dao.CSJobsDao;
+
+@Repository
+public class CSJobsDaoImpl implements CSJobsDao {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+	@Override
+	public CSJobs getCSJobs(Integer id) {
+		return entityManager.find( CSJobs.class, id );
+	}
+
+	@Override
+	public List<CSJobs> getCSJobs() {
+		return entityManager.createQuery( "from CSJobs order by id", CSJobs.class )
+	            .getResultList();
+	}
+
+	@Override
+	public List<CSJobs> getCSJobsApplicants(int x,int y) {
+		return entityManager.createQuery( "select ref from CSJobs ref join ref.users user where ref.id=:x and user.id=:y" , CSJobs.class )
+	            .setParameter("x", x).setParameter("y", y).getResultList();
+	}
+
+}

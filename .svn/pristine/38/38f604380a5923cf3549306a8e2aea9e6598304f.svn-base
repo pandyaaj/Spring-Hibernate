@@ -1,0 +1,115 @@
+package springmvc.model;
+
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "cs_jobapplicants")
+public class CSJobsApplicants implements Serializable{
+		
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+		@ManyToOne
+		CSUsers user;
+		
+	@Id
+		@ManyToOne
+		CSJobs job;
+		
+	private String phone_number;
+
+    public CSUsers getUser() {
+		return user;
+	}
+
+	public void setUser(CSUsers user) {
+		this.user = user;
+	}
+
+	public CSJobs getJob() {
+		return job;
+	}
+
+	public void setJob(CSJobs job) {
+		this.job = job;
+	}
+
+	public List<CSApplicantsDegree> getDegrees() {
+		return degrees;
+	}
+
+	public void setDegrees(List<CSApplicantsDegree> degrees) {
+		this.degrees = degrees;
+	}
+
+	private String address;
+
+    @Column(name = "curriculum_vitae")
+    private String Curriculum_Vitae;	
+    
+    
+    @Column(name = "research_statement")
+    private String Research_Statement; 
+    
+    @Column(name = "teaching_statement")
+    private String Teaching_Statement;
+    
+    
+    @OneToMany
+    List<CSApplicantsDegree> degrees;
+	
+	public String getPhone_number() {
+		return phone_number;
+	}
+
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
+	}
+
+
+
+	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCurriculum_Vitae() {
+		return Curriculum_Vitae;
+	}
+
+	public void setCurriculum_Vitae(String curriculum_Vitae) {
+		Curriculum_Vitae = curriculum_Vitae;
+	}
+
+	public String getResearch_Statement() {
+		return Research_Statement;
+	}
+
+	public void setResearch_Statement(String research_Statement) {
+		Research_Statement = research_Statement;
+	}
+
+	public String getTeaching_Statement() {
+		return Teaching_Statement;
+	}
+
+	public void setTeaching_Statement(String teaching_Statement) {
+		Teaching_Statement = teaching_Statement;
+	}
+
+	
+}

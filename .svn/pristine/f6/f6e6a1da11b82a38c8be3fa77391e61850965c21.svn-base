@@ -1,0 +1,92 @@
+package springmvc.model;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "cs_jobs")
+public class CSJobs implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+    @GeneratedValue
+    private Integer id;
+    
+	@ManyToMany
+	private List<CSUsers> users;
+	
+	//@OneToMany
+    //private List<CSReview> review;
+
+	private String jtitle;
+    
+    private String jtdescription;
+ 
+    private Date publish_date;
+    
+    private Date close_date;
+
+	public String getJtitle() {
+		return jtitle;
+	}
+
+	public void setJtitle(String jtitle) {
+		this.jtitle = jtitle;
+	}
+
+	public String getJtdescription() {
+		return jtdescription;
+	}
+
+	public void setJtdescription(String jtdescription) {
+		this.jtdescription = jtdescription;
+	}
+
+	
+	/*
+	public List<CSReview> getReview() {
+		return review;
+	}
+
+	public void setReview(List<CSReview> review) {
+		this.review = review;
+	}
+
+
+*/
+	public Date getPublish_date() {
+		return publish_date;
+	}
+
+	public void setPublish_date(Date publish_date) {
+		this.publish_date = publish_date;
+	}
+
+	public Date getClose_date() {
+		return close_date;
+	}
+
+	public void setClose_date(Date close_date) {
+		this.close_date = close_date;
+	}
+
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+}

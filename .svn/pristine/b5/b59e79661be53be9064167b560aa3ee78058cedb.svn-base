@@ -1,0 +1,70 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Applicant Registration</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+</head>
+<body background="../images/2.jpg"> 
+
+<div class="container">
+
+	<center><h1><font color="white">Apply for Job</font></h1></center>
+	<hr />
+<div align="right">
+<a href="/csjobs" class=" btn btn-danger"> LOGOUT</a></div>
+		<br/>
+	<form:form modelAttribute="appjob">
+		<div class="well">
+		<h3>Enter Job Details</font></h3>
+			<h4>
+				<small> Current Job Title &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </small>
+				<form:input path="currentJobTitle" required="true"/>
+			</h4>
+			<h4>
+				<small> Current Job Institution &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </small>
+				<form:input path="currentJobInstitution" required="true"/>
+			</h4>
+			<h4>
+				<small> Current Job start Year &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </small>
+				<form:input path="currentJobYear" required="true" type="number"/>
+			</h4>
+			<h3>Enter Academic details :</h3>
+
+
+			<div id="inputs">
+				Degree : <input type='text' name='degree' required> 
+				University : <input type='text' name='university' required> 
+				Year : <input type="number" name='year' required>
+				<a href="#" class="btn btn-info" onclick="getinput()">Add More</a><br>
+			</div>
+	
+	
+	</div>
+	<input type="submit" class="btn btn-info"  value="Apply">
+	
+	</form:form>
+
+	<script type="text/javascript" src="//code.jquery.com/jquery-latest.js"></script>
+
+	<script>
+	function getinput()
+	{
+	var degree="<br>Degree : <input type='text' name='degree' required>";
+	var university=" University : <input type='text' name='university' required>";
+	var year=" Year : <input type='text' name='year' required>";
+
+	$("#inputs").append(degree,university,year);
+	"<br>"
+	}
+	</script>
+
+</body>
+</html>

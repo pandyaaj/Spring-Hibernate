@@ -1,0 +1,24 @@
+package csjobs.model.dao;
+
+import java.util.List;
+
+import csjobs.model.Application;
+import csjobs.model.User;
+
+public interface ApplicantDao {
+	
+	User getUsers (Long id);
+	
+	List<User> getUsers();
+
+	User saveUsers(User users);
+	
+	List<User> emailCheck(String email);
+	
+	List<Application> getAppliedJob(Long applicantId);
+	
+	Application getAppDetails(Long applicantId);
+	
+	Application applyJob(Application app);
+	
+}

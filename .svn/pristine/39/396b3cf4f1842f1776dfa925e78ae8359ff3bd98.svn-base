@@ -1,0 +1,16 @@
+	
+	drop table users CASCADE ;
+
+    drop table authorities CASCADE ;
+
+    drop table jobs CASCADE ;
+
+    drop table job_committee_members CASCADE ;
+
+    drop table files CASCADE ;
+
+    drop table applications CASCADE ;
+
+    drop table application_degrees CASCADE ;
+
+    drop sequence hibernate_sequence;

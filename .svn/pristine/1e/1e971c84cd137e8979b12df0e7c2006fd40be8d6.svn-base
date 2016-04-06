@@ -1,0 +1,48 @@
+package csjobs.model.dao.jpa;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+
+import csjobs.model.Application;
+import csjobs.model.Job;
+import csjobs.model.dao.JobDao;
+
+@Repository
+public class JobDaoImpl implements JobDao{
+	
+	@PersistenceContext
+	private EntityManager entityManager;
+
+	@Override
+	public Job getJob(Long id) {
+		// TODO Auto-generated method stub
+		return entityManager.find(Job.class , id);
+	}
+
+	// for job list page
+	@Override
+	public List<Job> getJobs() {
+		// TODO Auto-generated method stub
+		//Date date = new Date();
+		//SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss");
+		// WHERE publishDate <= format.format(date) AND  closeDate>= format.format(date)
+		return entityManager.createQuery("select j from Job j where j.publishDate is not null AND (j.closeDate >= current_date OR j.closeDate is NULL) order by j.id",Job.class).getResultList();
+	}
+	
+	// jobs available to applicants
+	@Override
+	public List<Job> getAvailJob(Long applicantId) {
+		List<Job> result=entityManager.createQuery("from Job where id NOT IN (select job.id from Application where applicant.id=:applicantId) and publishDate is not null AND (closeDate >= current_date OR closeDate is NULL)" , Job.class)
+	            .setParameter("applicantId", applicantId).getResultList();
+		
+		if( result.isEmpty()){
+			return null;
+		}
+		else
+			return result;
+	}
+}

@@ -1,0 +1,75 @@
+package csjobs.model.dao.jpa;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import csjobs.model.Application;
+import csjobs.model.User;
+import csjobs.model.dao.ApplicantDao;
+
+@Repository
+public class ApplicantDaoImpl implements ApplicantDao{
+	
+	@PersistenceContext
+	private EntityManager entityManager;
+
+	@Override
+	public User getUsers(Long id) {
+		// TODO Auto-generated method stub
+		return entityManager.find(User.class, id);
+	}
+
+	@Override
+	public List<User> getUsers() {
+		// TODO Auto-generated method stub
+		return entityManager.createQuery("from Users order by id", User.class).getResultList();
+	}
+	
+	@Override
+	@Transactional
+	public User saveUsers(User users){
+		return entityManager.merge(users);
+	}
+
+	@Override
+	public List<User> emailCheck(String email) {
+		// TODO Auto-generated method stub
+		return entityManager.createQuery("from User where email=:email", User.class).setParameter("email", email).getResultList();
+	}
+
+	@Override
+	public List<Application> getAppliedJob(Long applicantId) {
+		// TODO Auto-generated method stub
+		
+		List<Application> result=entityManager.createQuery("select ref from Application ref join ref.applicant applicants join ref.job jobs where applicants.id=:applicantId" , Application.class)
+	            .setParameter("applicantId", applicantId).getResultList();
+		
+		if( result.isEmpty()){
+			return null;
+		}
+		else
+			return result;
+		
+	}
+
+	@Override
+	public Application getAppDetails(Long applicantId) {
+		// TODO Auto-generated method stub
+		return entityManager.createQuery("from Application where id=:applicantId" , Application.class)
+	            .setParameter("applicantId", applicantId).getSingleResult();
+	}
+
+	@Override
+	@Transactional
+	public Application applyJob(Application app) {
+		
+	return entityManager.merge(app);
+		
+	}
+
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>CS Jobs - Apply</title>
+</head>
+<body background="../images/2.jpg"> 
+<div class="container">
+<font color="white">
+<h2>CS Jobs <Right><a href="/csjobs/applicant.html" class="btn btn-info">BACK</a></Right></h2>
+<h3>${application.job.title}</h3>
+<p>Applicant: ${application.applicant.firstName} ${application.applicant.lastName}</p>
+</font>
+<form:form action="apply.html?${_csrf.parameterName}=${_csrf.token}" modelAttribute="application" enctype="multipart/form-data" method="post">
+
+<font color="white"><h4><p>Current Job Position:</p></h4></font>
+<div class="well">
+<h4>Title &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<form:input path="currentJobTitle" /></h4>
+<h4>Institution or Company<form:input path="currentJobInstitution" /></h4>
+<h4>Starting Year&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<form:input path="currentJobYear" /></h4>
+
+<h4>CV <input type="file" name="cv1" /></h4>
+<h4>Research Statement<input type="file" name="rs" /></h4>
+<h4>Teaching Statement<input type="file" name="ts" /></h4>
+<h4><input class="btn btn-info" type="submit" name="next" value="Next" /></h4>
+</div>
+</form:form>
+
+</div>
+</body>
+</html>

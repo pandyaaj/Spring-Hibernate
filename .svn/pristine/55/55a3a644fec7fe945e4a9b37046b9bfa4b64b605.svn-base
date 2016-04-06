@@ -1,0 +1,66 @@
+package springmvc.model;
+
+import java.io.Serializable;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "cs_review_committee")
+public class CSCommittee implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Column(name="committee_id")
+	private Integer id;
+   
+	//@Id
+	@ManyToMany
+	Set <CSUsers> reviwer;	
+	
+	@OneToOne
+	CSUsers chair;
+	
+	//@Id
+	@OneToMany
+	Set <CSJobs> jobs;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Set<CSUsers> getReviwer() {
+		return reviwer;
+	}
+
+	public void setReviwer(Set<CSUsers> reviwer) {
+		this.reviwer = reviwer;
+	}
+
+	public Set<CSJobs> getJobs() {
+		return jobs;
+	}
+
+	public void setJobs(Set<CSJobs> jobs) {
+		this.jobs = jobs;
+	}
+
+	
+
+	
+}

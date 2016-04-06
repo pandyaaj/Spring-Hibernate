@@ -1,0 +1,172 @@
+package csjobs.web.controller;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import csjobs.model.Application;
+import csjobs.model.Degree;
+import csjobs.model.Job;
+import csjobs.model.User;
+import csjobs.model.dao.ApplicantDao;
+import csjobs.model.dao.JobDao;
+import csjobs.model.dao.UserDao;
+import csjobs.web.validator.UserValidator;
+
+@Controller
+public class UserController {
+	
+	@Autowired
+	private JobDao job;
+	
+	@Autowired
+	private ApplicantDao appliants;
+	
+	@Autowired
+	private UserDao user;
+	
+	@Autowired
+	private UserValidator validate1;
+	
+
+    @RequestMapping({"index.html","/job/joblist.html"})
+    public String index(ModelMap model)
+    {
+        List<Job> jobs= job.getJobs();
+        model.put("jobs", jobs);
+    	return "job/joblist";
+    }
+    
+    @RequestMapping("/job/viewjob.html")
+    public String index1(ModelMap model, @RequestParam Long id)
+    {
+    	model.put("job",job.getJob(id));
+    	return "job/viewjob";
+    }
+    
+    @RequestMapping("/user/appdetails.html")
+    public String index3(ModelMap model, @RequestParam Long id)
+    {
+    	model.put("applicant",appliants.getAppDetails(id));
+    	return "user/appdetails";
+    }
+    
+    
+    @RequestMapping("/user/applicant.html")
+    public String index2(ModelMap model, @RequestParam Long applicantId)
+    {
+    	List<Job> jobs= job.getAvailJob(applicantId);
+        model.put("jobs", jobs);
+    	List<Application> app = appliants.getAppliedJob(applicantId);
+    	//List<Application> app= appl
+    	model.put("applicant",app);
+    	model.put("availjob", jobs);
+    	model.put("appId", applicantId);
+    	return "user/applicant";
+    }
+    
+    @RequestMapping(value = "/user/register.html", method = RequestMethod.GET)
+    public String Applicant(ModelMap model){
+    	model.put("users", new User());
+    	return "user/register";
+    	
+    }
+    
+ 
+    
+    @RequestMapping(value = "/user/register.html", method = RequestMethod.POST)
+    public String Applicant(@ModelAttribute User u, BindingResult result){
+    	
+    	validate1.validate(u, result);
+    	
+    	
+    	if(result.hasErrors()){
+    		return "user/register";
+    	}
+    	Set<String> userType = new HashSet<String>();
+    	
+    	userType.add("APPLICANT");
+    	u.setRoles(userType);
+    	
+    	u= appliants.saveUsers(u);
+    	return "redirect:/";
+    	
+    }
+    
+    @RequestMapping(value = "/user/login.html", method = RequestMethod.GET)
+    public String User(ModelMap model){
+    	
+    	return "user/login";
+    	
+    }
+    
+    @RequestMapping(value = "/user/login.html", method = RequestMethod.POST)
+    public String User(@RequestParam String email, @RequestParam String password, ModelMap model){
+    	
+    	List<User> users= user.getUserType(email, password);
+    	
+    	
+    	if (users.size() > 0) {
+	    	User user1 = users.get(0);
+	    	
+	    	if (user1.getRoles().contains("ADMIN")){
+	    		return "redirect:admin.html";
+	    	}
+	    	
+	    	else if (user1.getRoles().contains("REVIEWER")){
+	    		return "redirect:reviewer.html?reviewer_id="+user1.getId();
+	        }
+	    	
+	    	else if(user1.getRoles().contains("APPLICANT")){
+	    		return "redirect:applicant.html?applicantId="+user1.getId();
+	    	}	
+    	}
+    	model.put("invalid", "username/password wrong");
+    	return "user/login";
+    }
+    
+    @RequestMapping(value = "/user/applyjob.html", method = RequestMethod.GET)
+    public String AppJob(ModelMap model){
+    	
+    	model.put("appjob", new Application());
+    	return "user/applyjob";
+    	
+    }
+    
+    @RequestMapping(value = "/user/applyjob.html", method = RequestMethod.POST)
+    public String AppJob(@RequestParam String[] degree ,@RequestParam String[] university,@RequestParam int[] year,@RequestParam Long job_id,@RequestParam Long app_id,  ModelMap model,@ModelAttribute Application app ){
+    	
+    		List<Degree> degrees= new ArrayList<Degree>();
+    		
+    		Date submitDate=new Date();
+    		app.setSubmitDate(submitDate);
+    		
+    		app.setJob(job.getJob(job_id));
+    		app.setApplicant(appliants.getUsers(app_id));
+    		for (int i=0;i<degree.length;i++){
+    			Degree d = new Degree();
+    			d.setName(degree[i]);
+    			d.setSchool(university[i]);
+    			d.setYear(year[i]);
+    			degrees.add(d);
+    		}
+    		
+    		app.setDegrees(degrees);
+    		
+    		appliants.applyJob(app);
+    		
+    	   	return "redirect:applicant.html?applicantId="+app_id;
+    }
+    	
+}
